@@ -24,7 +24,7 @@ mongoose
     //removed depracation warning from Mongo
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: "videoApp",
+    dbName: "videoapp",
   })
   .then(() => console.log("Database Connection Successful"))
   .catch(err => console.log(err));

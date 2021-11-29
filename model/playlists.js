@@ -9,7 +9,7 @@ const playlistSchema = mongoose.Schema({
     type: String,
   },
   dateCreated: {
-    type: String,
+    type: Date,
   },
 });
 

@@ -33,7 +33,7 @@ router.get("/:id", async (req, res) => {
 //post new playlist
 router.post("/", async (req, res) => {
   // grab current date and time
-  const date = new Date();
+  const date = new Date()
 
   // grab attributes from request body
   let playlist = new Playlists({

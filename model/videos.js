@@ -12,7 +12,7 @@ const videosSchema = mongoose.Schema({
     type: String,
   },
   dateCreated: {
-    type: String,
+    type: Date,
   },
   thumbnail: {
     type: String,
