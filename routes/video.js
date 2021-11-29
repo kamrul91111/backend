@@ -99,5 +99,18 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// find by playlistId
+router.get("/videos/:playlistId", async (req, res) => {
+  const playlistId = req.params.playlistId;
+  const related = await Videos.find({playlistId: playlistId}).populate('playlistId')
+  // if nothing found
+  if (!related) {
+    res.status(500).json({success: false});
+  } else {
+    // else send all objects
+    res.status(200).send(related);
+  }
+});
+
 // export all modules
 module.exports = router;
