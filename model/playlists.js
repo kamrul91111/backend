@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // define playlists schema
-const playlistSchema = mongoose.schema({
+const playlistSchema = mongoose.Schema({
   name: {
     type: String,
   },
