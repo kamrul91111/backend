@@ -8,6 +8,7 @@ const port = process.env.PORT || 5000; // in a local environment, use 5000, for 
 
 // import routes
 const playlistRoutes = require('./routes/playlist')
+const videoRoutes = require('./routes/video')
 
 //for server sharing
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(morgan("tiny")); //requests logging
 
 // use routes
 app.use('/playlists', playlistRoutes)
+app.use('/videos', videoRoutes)
 
 //connecting to mongodb through mongoose, mongodb is not an ORM
 mongoose

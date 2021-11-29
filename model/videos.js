@@ -18,7 +18,7 @@ const videosSchema = mongoose.Schema({
     type: String,
   },
   // use playlist's id to link videos
-  plalistId: {
+  playlistId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Playlists",
   },
@@ -26,4 +26,4 @@ const videosSchema = mongoose.Schema({
 
 
 // export model
-exports.Videos = mongoose.model('Videos', playlistSchema)
+exports.Videos = mongoose.model('Videos', videosSchema)

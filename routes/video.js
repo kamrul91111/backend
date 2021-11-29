@@ -1,62 +1,63 @@
-const {Playlists} = require("../model/playlists"); // import model
+const {Videos} = require("../model/videos");
 const express = require("express");
 const router = express.Router(); //to make endpoints
 
-// it is possible to: add, delete, update, get all and get by ID
-
 //get all
 router.get("/", async (req, res) => {
-  const playlists = await Playlists.find();
+  const videos = await Videos.find();
 
   // if nothing found
-  if (!playlists) {
+  if (!videos) {
     res.status(500).json({success: false});
   } else {
     // else send all objects
-    res.status(200).send(playlists);
+    res.status(200).send(videos);
   }
 });
 
 //get by ID
 router.get("/:id", async (req, res) => {
-  const playlists = await Playlists.findById(req.params.id); //find using req id
+  const videos = await Videos.findById(req.params.id); //find using req id
 
   //if does not exist
-  if (!playlists) {
+  if (!videos) {
     res.status(500).json({message: "Item not found"});
   } else {
     // else send object
-    res.status(200).send(playlists);
+    res.status(200).send(videos);
   }
 });
 
-//post new playlist
+//post new video
 router.post("/", async (req, res) => {
   // grab current date and time
-  const date = new Date()
+  const date = new Date();
 
   // grab attributes from request body
-  let playlist = new Playlists({
+  let video = new Videos({
     name: req.body.name,
+    duration: req.body.duration,
     description: req.body.description,
     dateCreated: date,
+    thumbnail: req.body.thumbnail,
+    playlistId: req.body.playlistId,
   });
 
   //save playlist
-  playlist = await playlist.save();
+  video = await video.save();
 
   //if null is received (empty request)
-  if (!playlist) {
+  if (!video) {
     res.status(500).json({message: "Nothing was sent"});
   } else {
     //else send this response
-    res.status(200).send(playlist);
+    res.status(200).send(video);
   }
 });
 
-//delete playlist
+//delete video
 router.delete("/:id", (req, res) => {
-  Playlists.findByIdAndDelete(req.params.id)
+  Videos.findByIdAndDelete(req.params.id)
     .then(item => {
       // if found
       if (item) {
@@ -75,23 +76,26 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-//update playlist
+//update video
 router.put("/:id", async (req, res) => {
-  const playlist = await Playlists.findByIdAndUpdate(
+  const video = await Videos.findByIdAndUpdate(
     req.params.id,
     {
       name: req.body.name,
+      duration: req.body.duration,
       description: req.body.description,
+      thumbnail: req.body.thumbnail,
+      playlistId: req.body.playlistId,
       //FOR UPDATING OTHER FIELDS, JUST PRESS ADD THEM HERE
     },
     //return the new updated data
     {new: true}
   );
   //troubleshooting
-  if (!playlist) {
+  if (!video) {
     return res.status(400).send("The Bundle cannot be updated");
   } else {
-    res.status(200).send(playlist);
+    res.status(200).send(video);
   }
 });
 
